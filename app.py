@@ -26,7 +26,7 @@ def demo_pipeline_database():
     return {'msg': pipeline}
 
 # adding routes
-app.add_url_rule('/recommendation/<int:id>', view_func=Recommendation.recommendation, methods=['GET',])
+app.add_url_rule('/recommendation', view_func=Recommendation.recommendation, methods=['GET',])
 
 #run
 if __name__ == '__main__':
