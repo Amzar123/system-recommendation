@@ -99,6 +99,8 @@ class Recommendation():
        print(resultDetections)
 
 
+      #set up for generate recommendation based on question characteristics
+
       #  sentences = []
       #  for detection in resultDetections:
       #     if detection["item"] == "{\"items\": [\"h_n_difficult_word\"]}":
