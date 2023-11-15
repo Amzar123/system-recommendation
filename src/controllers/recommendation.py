@@ -103,7 +103,7 @@ class Recommendation():
 
       #  sentences = []
       #  for detection in resultDetections:
-      #     if detection["item"] == "{\"items\": [\"h_n_difficult_word\"]}":
+      #     if detection["solution"] == "t1":
       #        sentence = "ayo belajar tenses"
       #        sentences.append(sentence)
       #     elif detection["solution"] == "t2":
