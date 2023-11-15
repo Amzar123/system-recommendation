@@ -10,7 +10,7 @@ from sqlalchemy import create_engine, text
 from src.utils.db import db
 
 # import question characteristic 
-from pipeline.demo import DemoPipeline
+from src.pipeline.extract_features import extract_features
 
 # import Orange3
 import Orange
@@ -43,8 +43,8 @@ class Recommendation():
        user = User.get_by_id(id)
 
        # check if user exist or not
-       if user is None:
-            return CustomResponse.failure("user not found", 404)
+      #  if user is None:
+      #       return CustomResponse.failure("user not found", 404)
        
        # Define your database connection
     #    engine = create_engine('mysql+mysqlconnector://root:@localhost/smarteng_smartengtest')
@@ -68,7 +68,7 @@ class Recommendation():
     #    rows = result.all()
 
        # feature extraction 
-    #    pipeline = DemoPipeline(rows[0].question, [2,5,6,13])
+    #    pipeline = extract_features(rows[0].question, [2,5,6,13])
 
        # diskritisasi dataset 
     #    diskrit_data = Recommendation.dataset_discretization(pipeline.pipeline())
@@ -79,8 +79,6 @@ class Recommendation():
        # modelling dataset 
        # Apply FP-growth to find frequent itemsets
        frequent_itemsets = fpgrowth(data, min_support=0.5, use_colnames=True)
-
-    #    print(frequent_itemsets)
 
        maxItem =  len(frequent_itemsets) if len(frequent_itemsets) < 3 else 3 
        detections = []
