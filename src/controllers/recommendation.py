@@ -42,9 +42,9 @@ class Recommendation():
       #  get user by id 
        user = User.get_by_id(id)
 
-       # check if user exist or not
-      #  if user is None:
-      #       return CustomResponse.failure("user not found", 404)
+      #  check if user exist or not
+       if user is None:
+            return CustomResponse.failure("user not found", 404)
        
        # Define your database connection
     #    engine = create_engine('mysql+mysqlconnector://root:@localhost/smarteng_smartengtest')
