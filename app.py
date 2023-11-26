@@ -4,6 +4,7 @@ from src.utils.db import db
 from src.controllers.recommendation import Recommendation
 from src.pipeline.extract_features import extract_features
 from src.utils.helper_functions import demo_extract
+from src.pipeline.toefl_test import mock
 
 app = Flask(__name__)
 app.config.from_object('src.utils.setting.Config')
@@ -27,6 +28,11 @@ def demo_extract_features_pipeline():
 def demo_pipeline_database():
     pipeline = demo_extract(5)
     return {'msg': pipeline}
+
+@app.route("/test-toefl", methods=['GET'])
+def start_test():
+    test = mock()
+    return {'msg': 'okayge'}
 
 # adding routes
 app.add_url_rule('/recommendation/<int:id>', view_func=Recommendation.recommendation, methods=['GET',])
