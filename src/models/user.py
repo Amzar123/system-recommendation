@@ -1,4 +1,5 @@
 from src.utils.db import db
+from sqlalchemy import create_engine, text
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -29,3 +30,29 @@ class User(db.Model):
     @staticmethod
     def get_by_id(id):
         return User.query.filter_by(id=id).first()
+    
+    @staticmethod
+    def get_by_ids(ids):
+        return User.query.filter(User.id.in_(ids)).all()
+    
+    @staticmethod
+    def get_data_for_recommendation(ids):
+        sql_query = text('''
+            SELECT *
+            FROM users
+            JOIN test_results ON users.id = test_results.user_id
+            JOIN test_result_details ON test_results.id = test_result_details.result_id
+            JOIN question_banks ON test_result_details.question_id = question_banks.id
+            WHERE users.id IN :user_ids
+        ''').bindparams(user_ids=ids)
+
+        # execute raw query
+        result = db.session.execute(sql_query)
+
+        # Fetch the results
+        rows = result.fetchall()
+
+        # Close the result
+        result.close()
+
+        return rows

@@ -16,7 +16,7 @@ from src.pipeline.extract_features import extract_features
 import Orange
 
 # import render template
-from flask import render_template, jsonify
+from flask import render_template, jsonify, request
 
 # import model
 from mlxtend.frequent_patterns import fpgrowth
@@ -38,37 +38,15 @@ class Recommendation():
     
     # get recommendation
     @staticmethod
-    def recommendation(id):
-       # get user by id 
-      #  user = User.get_by_id(id)
+    def recommendation():
+       payload = request.get_json()
 
-       # check if user exist or not
-      #  if user is None:
-      #       return CustomResponse.failure("user not found", 404)
-       
-       # Define your database connection
-    #    engine = create_engine('mysql+mysqlconnector://root:@localhost/smarteng_smartengtest')
+       data = User.get_data_for_recommendation(payload['userIds'])
 
-       # Query to join User, Result, ResultDetail, and QuestionBank with filter by user ID dont use session
-       # Define the SQL query to join the tables
-    #    sql_query = text('''
-    #         SELECT *
-    #         FROM users
-    #         JOIN test_results ON users.id = test_results.user_id
-    #         JOIN test_result_details ON test_results.id = test_result_details.result_id
-    #         JOIN question_banks ON test_result_details.question_id = question_banks.id
-    #         WHERE users.id = 12
-    #     ''')
-      
-       # Execute the query
-    #    with engine.connect() as connection:
-    #     result = connection.execute(sql_query)
-    
-       # fetch all data 
-    #    rows = result.all()
+       print("ini datanya ", data)
 
        # feature extraction 
-    #    pipeline = extract_features(rows[0].question, [2,5,6,13])
+      #  pipeline = extract_features(rows[0].question, [2,5,6,13])
 
        # diskritisasi dataset 
     #    diskrit_data = Recommendation.dataset_discretization(pipeline.pipeline())

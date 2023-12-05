@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config.from_object('src.utils.setting.Config')
 
 # initialization
-# db.init_app(app)
+db.init_app(app)
 
 @app.route("/")
 def hello_world():
@@ -29,7 +29,7 @@ def demo_pipeline_database():
     return {'msg': pipeline}
 
 # adding routes
-app.add_url_rule('/recommendation/<int:id>', view_func=Recommendation.recommendation, methods=['GET',])
+app.add_url_rule('/recommendation', view_func=Recommendation.recommendation, methods=['POST',])
 
 #run
 if __name__ == '__main__':
